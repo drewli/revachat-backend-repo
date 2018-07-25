@@ -16,7 +16,7 @@ public class MainServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		PrintWriter pw = resp.getWriter();
-		pw.write("Backend for Revachat");
+		pw.write("Testing changing back end servlet");
 	}
 
 }
