@@ -14,8 +14,8 @@ public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		PrintWriter pw = respasd.getWriter();
+	protected void doGasdet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		PrintWriter pw = resp.getWriter();
 		pw.write("Testing changing back end servlet 2");
 	}
 
