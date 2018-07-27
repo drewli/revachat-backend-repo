@@ -14,19 +14,24 @@ public class UserRepository {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
-	public User addUser(User newUser){
-		System.out.println("LOG - In UserRepository.addUser");
-		Session session = sessionFactory.getCurrentSession();
-		session.save(newUser);
-		return newUser;
-	}
-
 
 	public List<User> getAll() {
 		System.out.println("[DEBUG] - In UserRepository.getAll()...");
 		Session s  = sessionFactory.getCurrentSession();
 		return s.createQuery("from User", User.class).getResultList();
+	}
+	
+	public User getById(int id) {
+		System.out.println("[DEBUG] - In UserRepository.getById()...");
+		Session s  = sessionFactory.getCurrentSession();
+		return s.get(User.class, id);
+	}
+	
+	public User addUser(User newUser){
+		System.out.println("[DEBUG] - In UserRepository.addUser");
+		Session session = sessionFactory.getCurrentSession();
+		session.save(newUser);
+		return newUser;
 	}
 	/*
 	updateUser(FlashCard)
