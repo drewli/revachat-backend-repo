@@ -22,7 +22,12 @@ public class UserRepository {
 		return newUser;
 	}
 
-	
+
+	public List<User> getAll() {
+		System.out.println("[DEBUG] - In UserRepository.getAll()...");
+		Session s  = sessionFactory.getCurrentSession();
+		return s.createQuery("from User", User.class).getResultList();
+	}
 	/*
 	updateUser(FlashCard)
 
