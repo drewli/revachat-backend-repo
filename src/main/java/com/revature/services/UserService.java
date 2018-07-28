@@ -30,8 +30,18 @@ public class UserService {
 	}
 	
 	public User addUser(User user) {
-		System.out.println("[DEBUG] - In UserService.addCard()...");
+		System.out.println("[DEBUG] - In UserService.addUser()...");
 		return userRepo.addUser(user);
 	}
 
+	public User updateUser(User User) {
+		System.out.println("[DEBUG] - In UserService.updateUser()...");
+		return userRepo.updateUser(User);
+	}
+	
+	public int deleteUser(int id) {
+		System.out.println("[DEBUG] - In UserService.deleteUser()...");
+		return userRepo.deleteUser(id);
+	}
+	
 }
