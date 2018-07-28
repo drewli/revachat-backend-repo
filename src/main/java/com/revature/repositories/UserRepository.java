@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.User;
+import com.revature.beans.User;
 
 @Repository
 public class UserRepository {
@@ -33,15 +34,35 @@ public class UserRepository {
 		session.save(newUser);
 		return newUser;
 	}
-	/*
-	updateUser(FlashCard)
-
-	deleteUser(int)	
 	
-	getAllUsers()
+	public User updateUser(User updatedUser) {
+		System.out.println("LOG - in UserRep.updateUser");
+		Session currentSession = sessionFactory.getCurrentSession();
+		User User = currentSession.get(User.class, updatedUser.getUser_id());
+		
+		if(User == null) {
+			return User;
+		}
 
-	getUserById(int)
-*/
+		else {
+			User = updatedUser;
+			return User;
+		}
+	}
+
+	public int deleteUser(int id) {
+		System.out.println("LOG - in UserRep.deleteUser");
+		Session currentSession = sessionFactory.getCurrentSession();
+		User UserCheck = currentSession.get(User.class, id);
+
+		if(UserCheck == null) {
+			return -1;
+		} else {
+			currentSession.delete(UserCheck);
+			return 1;
+		}
+	}
+
 
 
 }
