@@ -10,10 +10,10 @@ public class RevachatDriver {
 	
 	public static void main(String[] args) {
 		
-		User newUser = new User("tsteyaert","tom@gmail5.com", "Tom", "Steyaert");
+	//	User newUser = new User("tsteyaert","tom@gmail5.com", "Tom", "Steyaert");
 		
-		UserRepository repo = new UserRepository();
-		repo.addUser(newUser);
+		//UserRepository repo = new UserRepository();
+		//repo.addUser(newUser);
 		
 	}
 	}
