@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,7 @@ public class ChannelController {
 		Channel updatedChannel = channelService.updateChannel(channel);
 
 		if(updatedChannel == null) {
-			throw new ChannelNotFoundException("Channel with id+ " + updatedChannel.getchannel_id() + " not found");
+			throw new ChannelNotFoundException("Channel with id+ " + channel.getchannel_id() + " not found");
 		}
 
 		return new ResponseEntity<Channel>(updatedChannel, HttpStatus.OK);
