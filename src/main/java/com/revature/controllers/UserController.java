@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.beans.User;
 import com.revature.services.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/users")
 public class UserController {
