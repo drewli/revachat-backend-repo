@@ -20,6 +20,7 @@ import com.revature.beans.UserErrorResponse;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.services.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/users")
 public class UserController {
