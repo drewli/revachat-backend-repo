@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.revature.beans.MessageErrorResponse;
 import com.revature.exceptions.MessageNotFoundException;
 import com.revature.services.MessageService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/messages")
 public class MessageController {
@@ -36,7 +38,7 @@ public class MessageController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public Message getById(int id) {
+	public Message getById(@PathVariable int id) {
 
 		Message message = messageService.getById(id);	
 

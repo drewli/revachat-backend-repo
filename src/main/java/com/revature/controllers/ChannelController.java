@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.revature.beans.ChannelErrorResponse;
 import com.revature.exceptions.ChannelNotFoundException;
 import com.revature.services.ChannelService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/channels")
 public class ChannelController {
@@ -36,7 +38,7 @@ public class ChannelController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public Channel getById(int id) {
+	public Channel getById(@PathVariable int id) {
 
 		Channel channel = channelService.getById(id);
 
