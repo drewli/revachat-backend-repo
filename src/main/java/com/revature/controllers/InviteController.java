@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.revature.beans.InviteErrorResponse;
 import com.revature.exceptions.InviteNotFoundException;
 import com.revature.services.InviteService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/invites")
 public class InviteController {
@@ -36,7 +38,7 @@ public class InviteController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public Invite getById(int id) {
+	public Invite getById(@PathVariable int id) {
 
 		Invite invite = inviteService.getById(id);	
 
