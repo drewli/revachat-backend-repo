@@ -12,71 +12,68 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table(name="CHANNEL")
+@Table(name="CHANNELS")
 @SequenceGenerator(name="channelSeq", sequenceName="CHANNEL_SEQ", allocationSize=1)
 public class Channel {
-
-	public Channel() {}
-	
-	public Channel(int channel_id, String channel_name, String channel_creator_id) {
-		super();
-		this.channel_id = channel_id;
-		this.channel_name = channel_name;
-		this.channel_creator_id = channel_creator_id;
-	}
-
-	
-	
-	public Channel(String channel_name, String channel_creator_id) {
-		super();
-		this.channel_name = channel_name;
-		this.channel_creator_id = channel_creator_id;
-	}
-
-
 	@Id
 	@Column(name="CHANNEL_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="channelSeq")
-	private int channel_id;
-
-	@Column(name="CHANNEL_NAME")
-	private String channel_name;
-
+	private int channelId;
 	
-	@Column(name="CHANNEL_CREATOR_ID")
-	private String channel_creator_id;
-
-	public int getchannel_id() {
-		return channel_id;
+	@Column(name="CHANNEL_DIRECT_MESSAGING")
+	private String isDirectMessaging;
+	
+	@Column(name="CHANNEL_NAME")
+	private String channelName;
+	
+	public Channel() {
+		super();
 	}
 
-	public void setchannel_id(int channel_id) {
-		this.channel_id = channel_id;
+	public Channel(String isDirectMessaging, String channelName) {
+		super();
+		this.isDirectMessaging = isDirectMessaging;
+		this.channelName = channelName;
 	}
 
-	public String getchannel_name() {
-		return channel_name;
+	public Channel(int channelId, String isDirectMessaging, String channelName) {
+		super();
+		this.channelId = channelId;
+		this.isDirectMessaging = isDirectMessaging;
+		this.channelName = channelName;
 	}
 
-	public void setchannel_name(String channel_name) {
-		this.channel_name = channel_name;
+	public int getChannelId() {
+		return channelId;
 	}
 
-	public String getChannel_creator_id() {
-		return channel_creator_id;
+	public void setChannelId(int channelId) {
+		this.channelId = channelId;
 	}
 
-	public void setChannel_creator_id(String channel_creator_id) {
-		this.channel_creator_id = channel_creator_id;
+	public String getIsDirectMessaging() {
+		return isDirectMessaging;
+	}
+
+	public void setIsDirectMessaging(String isDirectMessaging) {
+		this.isDirectMessaging = isDirectMessaging;
+	}
+
+	public String getChannelName() {
+		return channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((channel_name == null) ? 0 : channel_name.hashCode());
-		result = prime * result + ((channel_creator_id == null) ? 0 : channel_creator_id.hashCode());
-		result = prime * result + channel_id;
+		result = prime * result + channelId;
+		result = prime * result + ((channelName == null) ? 0 : channelName.hashCode());
+		result = prime * result + ((isDirectMessaging == null) ? 0 : isDirectMessaging.hashCode());
 		return result;
 	}
 
@@ -89,27 +86,26 @@ public class Channel {
 		if (getClass() != obj.getClass())
 			return false;
 		Channel other = (Channel) obj;
-		if (channel_name == null) {
-			if (other.channel_name != null)
-				return false;
-		} else if (!channel_name.equals(other.channel_name))
+		if (channelId != other.channelId)
 			return false;
-		if (channel_creator_id == null) {
-			if (other.channel_creator_id != null)
+		if (channelName == null) {
+			if (other.channelName != null)
 				return false;
-		} else if (!channel_creator_id.equals(other.channel_creator_id))
+		} else if (!channelName.equals(other.channelName))
 			return false;
-		if (channel_id != other.channel_id)
+		if (isDirectMessaging == null) {
+			if (other.isDirectMessaging != null)
+				return false;
+		} else if (!isDirectMessaging.equals(other.isDirectMessaging))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Channel [channel_id=" + channel_id + ", channel_name=" + channel_name + ", channel_creator_id="
-				+ channel_creator_id + "]";
+		return "Channel [channelId=" + channelId + ", isDirectMessaging=" + isDirectMessaging + ", channelName="
+				+ channelName + "]";
 	}
-
 	
 	
 	

@@ -1,14 +1,21 @@
 package com.revature.beans;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+// import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.stereotype.Component;
+
+// import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Component
@@ -19,80 +26,93 @@ public class Message {
 	@Id
 	@Column(name="MESSAGE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="messageSeq")
-	private int message_id;
+	private int messageId;
 
-	@Column(name="MESSAGE")
-	private String message;
+	@Column(name="MESSAGE_CONTENT")
+	private String messageContent;
 
-	@Column(name="MESSAGE_USER_ID")
-	private String message_user_id;
+	@Column(name="MESSAGE_SENDER_ID")
+	private int messageSenderId;
 
-	@Column(name="MESAGE_CHANNEL_ID")
-	private String message_channel_id;
+	@Column(name="MESSAGE_CHANNEL_ID")
+	private int messageChannelId;
+	
+	@Column(name="MESSAGE_TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	// @JsonFormat(pattern="EEE MMM dd yyyy HH:mm:ss \'GMT\'Z \'(\'z\')\'")
+	private Date messageTimestamp;
 
-	public Message() {}
-
-	public Message(int message_id, String message, String message_user_id, String message_channel_id) {
+	public Message() {
 		super();
-		this.message_id = message_id;
-		this.message = message;
-		this.message_user_id = message_user_id;
-		this.message_channel_id = message_channel_id;
 	}
 
-	public Message(String message, String message_user_id, String message_channel_id) {
+	public Message(String messageContent, int messageSenderId, int messageChannelId, Date messageTimestamp) {
 		super();
-		this.message = message;
-		this.message_user_id = message_user_id;
-		this.message_channel_id = message_channel_id;
+		this.messageContent = messageContent;
+		this.messageSenderId = messageSenderId;
+		this.messageChannelId = messageChannelId;
+		this.messageTimestamp = messageTimestamp;
 	}
 
-	public int getMessage_id() {
-		return message_id;
+	public Message(int messageId, String messageContent, int messageSenderId, int messageChannelId,
+			Date messageTimestamp) {
+		super();
+		this.messageId = messageId;
+		this.messageContent = messageContent;
+		this.messageSenderId = messageSenderId;
+		this.messageChannelId = messageChannelId;
+		this.messageTimestamp = messageTimestamp;
 	}
 
-	public void setMessage_id(int message_id) {
-		this.message_id = message_id;
+	public int getMessageId() {
+		return messageId;
 	}
 
-	public String getMessage() {
-		return message;
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public String getMessageContent() {
+		return messageContent;
 	}
 
-	public String getMessage_user_id() {
-		return message_user_id;
+	public void setMessageContent(String messageContent) {
+		this.messageContent = messageContent;
 	}
 
-	public void setMessage_user_id(String message_user_id) {
-		this.message_user_id = message_user_id;
+	public int getMessageSenderId() {
+		return messageSenderId;
 	}
 
-	public String getMessage_channel_id() {
-		return message_channel_id;
+	public void setMessageSenderId(int messageSenderId) {
+		this.messageSenderId = messageSenderId;
 	}
 
-	public void setMessage_channel_id(String message_channel_id) {
-		this.message_channel_id = message_channel_id;
+	public int getMessageChannelId() {
+		return messageChannelId;
 	}
 
-	@Override
-	public String toString() {
-		return "Message [message_id=" + message_id + ", message=" + message + ", message_user_id=" + message_user_id
-				+ ", message_channel_id=" + message_channel_id + "]";
+	public void setMessageChannelId(int messageChannelId) {
+		this.messageChannelId = messageChannelId;
+	}
+
+	public java.util.Date getMessageTimestamp() {
+		return messageTimestamp;
+	}
+
+	public void setMessageTimestamp(java.util.Date messageTimestamp) {
+		this.messageTimestamp = messageTimestamp;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + ((message_channel_id == null) ? 0 : message_channel_id.hashCode());
-		result = prime * result + message_id;
-		result = prime * result + ((message_user_id == null) ? 0 : message_user_id.hashCode());
+		result = prime * result + messageChannelId;
+		result = prime * result + ((messageContent == null) ? 0 : messageContent.hashCode());
+		result = prime * result + messageId;
+		result = prime * result + messageSenderId;
+		result = prime * result + ((messageTimestamp == null) ? 0 : messageTimestamp.hashCode());
 		return result;
 	}
 
@@ -105,24 +125,33 @@ public class Message {
 		if (getClass() != obj.getClass())
 			return false;
 		Message other = (Message) obj;
-		if (message == null) {
-			if (other.message != null)
-				return false;
-		} else if (!message.equals(other.message))
+		if (messageChannelId != other.messageChannelId)
 			return false;
-		if (message_channel_id == null) {
-			if (other.message_channel_id != null)
+		if (messageContent == null) {
+			if (other.messageContent != null)
 				return false;
-		} else if (!message_channel_id.equals(other.message_channel_id))
+		} else if (!messageContent.equals(other.messageContent))
 			return false;
-		if (message_id != other.message_id)
+		if (messageId != other.messageId)
 			return false;
-		if (message_user_id == null) {
-			if (other.message_user_id != null)
+		if (messageSenderId != other.messageSenderId)
+			return false;
+		if (messageTimestamp == null) {
+			if (other.messageTimestamp != null)
 				return false;
-		} else if (!message_user_id.equals(other.message_user_id))
+		} else if (!messageTimestamp.equals(other.messageTimestamp))
 			return false;
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", messageContent=" + messageContent + ", messageSenderId="
+				+ messageSenderId + ", messageChannelId=" + messageChannelId + ", messageTimestamp=" + messageTimestamp
+				+ "]";
+	}
+	
+	
+	
+	
 }

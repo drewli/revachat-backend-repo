@@ -34,9 +34,9 @@ public class MessageService {
 		return messageRepo.addMessage(message);
 	}
 
-	public Message updateMessage(Message Message) {
+	public Message updateMessage(Message message) {
 		System.out.println("[DEBUG] - In MessageService.updateMessage()...");
-		return messageRepo.updateMessage(Message);
+		return messageRepo.updateMessage(message);
 	}
 	
 	public int deleteMessage(int id) {

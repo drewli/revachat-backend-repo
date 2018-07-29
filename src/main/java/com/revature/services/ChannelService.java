@@ -29,9 +29,9 @@ public class ChannelService {
 		return ChannelRepo.getChannelById(id);
 	}
 	
-	public Channel addChannel(Channel Channel) {
+	public Channel addChannel(Channel channel) {
 		System.out.println("[DEBUG] - In ChannelService.addChannel()...");
-		return ChannelRepo.addChannel(Channel);
+		return ChannelRepo.addChannel(channel);
 	}
 
 

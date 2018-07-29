@@ -34,9 +34,9 @@ public class UserService {
 		return userRepo.addUser(user);
 	}
 
-	public User updateUser(User User) {
+	public User updateUser(User user) {
 		System.out.println("[DEBUG] - In UserService.updateUser()...");
-		return userRepo.updateUser(User);
+		return userRepo.updateUser(user);
 	}
 	
 	public int deleteUser(int id) {
