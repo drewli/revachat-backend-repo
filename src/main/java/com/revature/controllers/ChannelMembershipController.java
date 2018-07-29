@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.revature.beans.ChannelMembershipErrorResponse;
 import com.revature.exceptions.ChannelMembershipNotFoundException;
 import com.revature.services.ChannelMembershipService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/channel-memberships")
 public class ChannelMembershipController {
@@ -36,7 +38,7 @@ public class ChannelMembershipController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public ChannelMembership getById(int id) {
+	public ChannelMembership getById(@PathVariable int id) {
 
 		ChannelMembership channelMembership = channelMembershipService.getById(id);	
 
