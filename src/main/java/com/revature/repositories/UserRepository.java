@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.revature.beans.User;
-import com.revature.beans.User;
 
 @Repository
 public class UserRepository {
@@ -38,7 +37,7 @@ public class UserRepository {
 	public User updateUser(User updatedUser) {
 		System.out.println("LOG - in UserRep.updateUser");
 		Session currentSession = sessionFactory.getCurrentSession();
-		User User = currentSession.get(User.class, updatedUser.getUser_id());
+		User User = currentSession.get(User.class, updatedUser.getUserId());
 		
 		if(User == null) {
 			return User;
