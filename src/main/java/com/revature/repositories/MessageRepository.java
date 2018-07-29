@@ -37,7 +37,7 @@ public class MessageRepository {
 	public Message updateMessage(Message updatedMessage) {
 		System.out.println("LOG - in messageRep.updateMessage");
 		Session currentSession = sessionFactory.getCurrentSession();
-		Message message = currentSession.get(Message.class, updatedMessage.getMessage_id());
+		Message message = currentSession.get(Message.class, updatedMessage.getMessageId());
 
 		if(message == null) {
 			return message;
