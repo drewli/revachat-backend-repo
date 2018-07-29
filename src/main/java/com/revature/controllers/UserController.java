@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,7 @@ import com.revature.beans.UserErrorResponse;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.services.UserService;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value="/users")
 public class UserController {
@@ -37,7 +38,7 @@ public class UserController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public User getById(int id) {
+	public User getById(@PathVariable int id) {
 
 		User User = UserService.getById(id);	
 
@@ -71,23 +72,23 @@ public class UserController {
 	public ResponseEntity<User> deleteUser(@PathVariable int id) {
 		System.out.println("LOG - In UserController.deleteUser()...");
 		int deleted = UserService.deleteUser(id);
-		
+
 		if(deleted == -1) {
 			throw new UserNotFoundException("User with id " + id + " not found");
 		}
 		return new ResponseEntity<User>(HttpStatus.OK); 
 	}
-	
-	
+
+
 	@ExceptionHandler
 	public ResponseEntity<UserErrorResponse> UserNotFound(UserNotFoundException e){
-		
+
 		UserErrorResponse cer = new UserErrorResponse();
-		
+
 		cer.setMessage(e.getMessage());
 		cer.setStatusCode(HttpStatus.NOT_FOUND.value());
 		cer.setTimestamp(System.currentTimeMillis());
-		
+
 		return new ResponseEntity<UserErrorResponse>(cer, HttpStatus.NOT_FOUND);
 	}
 
