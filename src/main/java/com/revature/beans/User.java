@@ -19,7 +19,7 @@ public class User {
 	@Id
 	@Column(name="USER_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="userSeq")
-	private int user_id;
+	private int userId;
 
 	@Column(name="USERNAME")
 	private String username;
@@ -28,38 +28,38 @@ public class User {
 	private String email;
 
 	@Column(name="FIRST_NAME")
-	private String first_name;
+	private String firstName;
 
 	@Column(name="LAST_NAME")
-	private String last_name;
+	private String lastName;
 
 	public User() {
 		System.out.println("LOG: User has been instantiated");
 	}
 
-	public User(String username, String email, String first_name, String last_name) {
+	public User(String username, String email, String firstName, String lastName) {
 		super();
 		this.username = username;
 		this.email = email;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
-
-	public User(int user_id, String username, String email, String first_name, String last_name) {
+	
+	public User(int userId, String username, String email, String firstName, String lastName) {
 		super();
-		this.user_id = user_id;
+		this.userId = userId;
 		this.username = username;
 		this.email = email;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -78,26 +78,20 @@ public class User {
 		this.email = email;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", email=" + email + ", first_name=" + first_name
-				+ ", last_name=" + last_name + "]";
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Override
@@ -105,9 +99,9 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
-		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
-		result = prime * result + user_id;
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -126,17 +120,17 @@ public class User {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (first_name == null) {
-			if (other.first_name != null)
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!first_name.equals(other.first_name))
+		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (last_name == null) {
-			if (other.last_name != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!last_name.equals(other.last_name))
+		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (user_id != other.user_id)
+		if (userId != other.userId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -146,6 +140,10 @@ public class User {
 		return true;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
+				+ ", lastName=" + lastName + "]";
+	}
+	
 }
