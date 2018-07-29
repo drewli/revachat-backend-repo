@@ -11,6 +11,9 @@ import com.revature.beans.Channel;
 
 @Repository
 public class ChannelRepository {
+	static {
+		System.out.println("[DEBUG] - ChannelRepository instantiated...");
+	}
 
 	@Autowired
 	SessionFactory sessionFactory;
@@ -37,7 +40,7 @@ public class ChannelRepository {
 	public Channel updateChannel(Channel updatedChannel) {
 		System.out.println("LOG - in ChanelRep.updateChannel");
 		Session currentSession = sessionFactory.getCurrentSession();
-		Channel channel = currentSession.get(Channel.class, updatedChannel.getchannel_id());
+		Channel channel = currentSession.get(Channel.class, updatedChannel.getChannelId());
 
 		if(channel == null) {
 			return channel;

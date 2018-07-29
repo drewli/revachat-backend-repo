@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,12 +53,12 @@ public class MessageController {
 		return new ResponseEntity<Message>(newMessage, HttpStatus.CREATED);
 	}
 
-	@PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Message> updateMessage(@RequestBody Message message ){
 		Message updatedMessage = messageService.updateMessage(message);
 
 		if(updatedMessage == null) {
-			throw new MessageNotFoundException("Message with id+ " + message.getMessage_id() + " not found");
+			throw new MessageNotFoundException("Message with id+ " + message.getMessageId() + " not found");
 		}
 
 		return new ResponseEntity<Message>(updatedMessage, HttpStatus.OK);

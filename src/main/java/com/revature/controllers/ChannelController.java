@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class ChannelController {
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Channel getById(int id) {
 
-		Channel channel = channelService.getById(id);	
+		Channel channel = channelService.getById(id);
 
 		if(channel == null) {
 			throw new ChannelNotFoundException("Channel with id: " + id + " not found");
@@ -52,12 +53,12 @@ public class ChannelController {
 		return new ResponseEntity<Channel>(newChannel, HttpStatus.CREATED);
 	}
 
-	@PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Channel> updateChannel(@RequestBody Channel channel ){
 		Channel updatedChannel = channelService.updateChannel(channel);
 
 		if(updatedChannel == null) {
-			throw new ChannelNotFoundException("Channel with id+ " + channel.getchannel_id() + " not found");
+			throw new ChannelNotFoundException("Channel with id+ " + channel.getChannelId() + " not found");
 		}
 
 		return new ResponseEntity<Channel>(updatedChannel, HttpStatus.OK);
