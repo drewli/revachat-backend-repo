@@ -7,13 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+// import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.stereotype.Component;
+
+// import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Component
@@ -36,7 +38,9 @@ public class Message {
 	private int messageChannelId;
 	
 	@Column(name="MESSAGE_TIMESTAMP")
-	private @Temporal(TemporalType.TIMESTAMP) java.util.Date messageTimestamp;
+	@Temporal(TemporalType.TIMESTAMP)
+	// @JsonFormat(pattern="EEE MMM dd yyyy HH:mm:ss \'GMT\'Z \'(\'z\')\'")
+	private Date messageTimestamp;
 
 	public Message() {
 		super();

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+// import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,7 +22,7 @@ public class Invite {
 	private int inviteId;
 	
 	@Column(name="INVITED_USER_ID")
-	private int invitedUsedId;
+	private int invitedUserId;
 
 	@Column(name="INVITE_CHANNEL_ID")
 	private int inviteChannelId;
@@ -31,16 +31,16 @@ public class Invite {
 		super();
 	}
 
-	public Invite(int invitedUsedId, int inviteChannelId) {
+	public Invite(int invitedUserId, int inviteChannelId) {
 		super();
-		this.invitedUsedId = invitedUsedId;
+		this.invitedUserId = invitedUserId;
 		this.inviteChannelId = inviteChannelId;
 	}
 
-	public Invite(int inviteId, int invitedUsedId, int inviteChannelId) {
+	public Invite(int inviteId, int invitedUserId, int inviteChannelId) {
 		super();
 		this.inviteId = inviteId;
-		this.invitedUsedId = invitedUsedId;
+		this.invitedUserId = invitedUserId;
 		this.inviteChannelId = inviteChannelId;
 	}
 
@@ -52,12 +52,12 @@ public class Invite {
 		this.inviteId = inviteId;
 	}
 
-	public int getInvitedUsedId() {
-		return invitedUsedId;
+	public int getInvitedUserId() {
+		return invitedUserId;
 	}
 
-	public void setInvitedUsedId(int invitedUsedId) {
-		this.invitedUsedId = invitedUsedId;
+	public void setInvitedUserId(int invitedUserId) {
+		this.invitedUserId = invitedUserId;
 	}
 
 	public int getInviteChannelId() {
@@ -74,7 +74,7 @@ public class Invite {
 		int result = 1;
 		result = prime * result + inviteChannelId;
 		result = prime * result + inviteId;
-		result = prime * result + invitedUsedId;
+		result = prime * result + invitedUserId;
 		return result;
 	}
 
@@ -91,14 +91,14 @@ public class Invite {
 			return false;
 		if (inviteId != other.inviteId)
 			return false;
-		if (invitedUsedId != other.invitedUsedId)
+		if (invitedUserId != other.invitedUserId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Invite [inviteId=" + inviteId + ", invitedUsedId=" + invitedUsedId + ", inviteChannelId="
+		return "Invite [inviteId=" + inviteId + ", invitedUserId=" + invitedUserId + ", inviteChannelId="
 				+ inviteChannelId + "]";
 	}
 	
