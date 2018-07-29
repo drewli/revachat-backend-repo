@@ -33,15 +33,35 @@ public class UserRepository {
 		session.save(newUser);
 		return newUser;
 	}
-	/*
-	updateUser(FlashCard)
-
-	deleteUser(int)	
 	
-	getAllUsers()
+	public User updateUser(User updatedUser) {
+		System.out.println("LOG - in UserRep.updateUser");
+		Session currentSession = sessionFactory.getCurrentSession();
+		User User = currentSession.get(User.class, updatedUser.getUserId());
+		
+		if(User == null) {
+			return User;
+		}
 
-	getUserById(int)
-*/
+		else {
+			User = updatedUser;
+			return User;
+		}
+	}
+
+	public int deleteUser(int id) {
+		System.out.println("LOG - in UserRep.deleteUser");
+		Session currentSession = sessionFactory.getCurrentSession();
+		User UserCheck = currentSession.get(User.class, id);
+
+		if(UserCheck == null) {
+			return -1;
+		} else {
+			currentSession.delete(UserCheck);
+			return 1;
+		}
+	}
+
 
 
 }
