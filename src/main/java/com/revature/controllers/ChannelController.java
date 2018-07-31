@@ -38,7 +38,7 @@ public class ChannelController {
 	}
 
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public Channel getById(int id) {
+	public Channel getById(@PathVariable int id) {
 
 		Channel channel = channelService.getById(id);
 
