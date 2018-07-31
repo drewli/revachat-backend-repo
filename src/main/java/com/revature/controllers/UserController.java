@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
 import com.revature.beans.UserErrorResponse;
+import com.revature.exceptions.UserCreationException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.services.UserService;
 
@@ -33,7 +34,7 @@ public class UserController {
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> getAllUsers(){
-		System.out.println("LOG - in UserController.getAllUsers");
+		System.out.println("[LOG] - in UserController.getAllUsers");
 		return UserService.getAll();
 	}
 
@@ -51,8 +52,13 @@ public class UserController {
 
 	@PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addUser(@RequestBody User User) {
-		User newUser= UserService.addUser(User);
-		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+		try {
+			User newUser= UserService.addUser(User);
+			return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new UserCreationException("The given values conflict with another user");
+		}
 	}
 
 	@PutMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -82,14 +88,24 @@ public class UserController {
 
 	@ExceptionHandler
 	public ResponseEntity<UserErrorResponse> UserNotFound(UserNotFoundException e){
+		UserErrorResponse uer = new UserErrorResponse();
 
-		UserErrorResponse cer = new UserErrorResponse();
+		uer.setMessage(e.getMessage());
+		uer.setStatusCode(HttpStatus.NOT_FOUND.value());
+		uer.setTimestamp(System.currentTimeMillis());
 
-		cer.setMessage(e.getMessage());
-		cer.setStatusCode(HttpStatus.NOT_FOUND.value());
-		cer.setTimestamp(System.currentTimeMillis());
+		return new ResponseEntity<UserErrorResponse>(uer, HttpStatus.NOT_FOUND);
+	}
 
-		return new ResponseEntity<UserErrorResponse>(cer, HttpStatus.NOT_FOUND);
+	@ExceptionHandler
+	public ResponseEntity<UserErrorResponse> UserCreation(UserCreationException e){
+		UserErrorResponse uer = new UserErrorResponse();
+
+		uer.setMessage(e.getMessage());
+		uer.setStatusCode(HttpStatus.CONFLICT.value());
+		uer.setTimestamp(System.currentTimeMillis());
+
+		return new ResponseEntity<UserErrorResponse>(uer, HttpStatus.CONFLICT);
 	}
 
 }
