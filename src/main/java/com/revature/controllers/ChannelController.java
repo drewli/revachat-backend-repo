@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Channel;
 import com.revature.beans.ChannelErrorResponse;
+import com.revature.exceptions.ChannelCreationException;
 import com.revature.exceptions.ChannelNotFoundException;
 import com.revature.services.ChannelService;
 
@@ -51,8 +52,13 @@ public class ChannelController {
 
 	@PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Channel> addChannel(@RequestBody Channel channel) {
-		Channel newChannel= channelService.addChannel(channel);
-		return new ResponseEntity<Channel>(newChannel, HttpStatus.CREATED);
+		try {
+			Channel newChannel= channelService.addChannel(channel);
+			return new ResponseEntity<Channel>(newChannel, HttpStatus.CREATED);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new ChannelCreationException("The given values conflict with another channel");
+		}
 	}
 
 	@PutMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -90,6 +96,17 @@ public class ChannelController {
 		cer.setTimestamp(System.currentTimeMillis());
 		
 		return new ResponseEntity<ChannelErrorResponse>(cer, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<ChannelErrorResponse> ChannelCreation(ChannelCreationException e){
+		ChannelErrorResponse cer = new ChannelErrorResponse();
+
+		cer.setMessage(e.getMessage());
+		cer.setStatusCode(HttpStatus.CONFLICT.value());
+		cer.setTimestamp(System.currentTimeMillis());
+
+		return new ResponseEntity<ChannelErrorResponse>(cer, HttpStatus.CONFLICT);
 	}
 
 }
