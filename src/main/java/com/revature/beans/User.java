@@ -32,6 +32,9 @@ public class User {
 
 	@Column(name="LAST_NAME")
 	private String lastName;
+	
+	@Column(name="USER_AVATAR")
+	private String userAvatar;
 
 	public User() {
 		System.out.println("LOG: User has been instantiated");
@@ -92,6 +95,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getUserAvatar() {
+		return userAvatar;
+	}
+
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
 	}
 
 	@Override
