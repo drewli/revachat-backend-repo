@@ -57,6 +57,25 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public User(String username, String email, String firstName, String lastName, String userAvatar) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userAvatar = userAvatar;
+	}
+
+	public User(int userId, String username, String email, String firstName, String lastName, String userAvatar) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userAvatar = userAvatar;
+	}
+
 	public int getUserId() {
 		return userId;
 	}
@@ -112,6 +131,7 @@ public class User {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((userAvatar == null) ? 0 : userAvatar.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -141,6 +161,11 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (userAvatar == null) {
+			if (other.userAvatar != null)
+				return false;
+		} else if (!userAvatar.equals(other.userAvatar))
+			return false;
 		if (userId != other.userId)
 			return false;
 		if (username == null) {
@@ -154,7 +179,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", firstName=" + firstName
-				+ ", lastName=" + lastName + "]";
+				+ ", lastName=" + lastName + ", userAvatar=" + userAvatar + "]";
 	}
 	
 }
