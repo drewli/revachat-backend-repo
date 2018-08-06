@@ -45,6 +45,7 @@ public class MessageRepository {
 
 		else {
 			message = updatedMessage;
+			currentSession.merge(message);
 			return message;
 		}
 	}

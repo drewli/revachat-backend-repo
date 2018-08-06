@@ -48,6 +48,7 @@ public class ChannelRepository {
 
 		else {
 			channel = updatedChannel;
+			currentSession.merge(channel);
 			return channel;
 		}
 	}

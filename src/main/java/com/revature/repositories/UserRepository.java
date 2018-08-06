@@ -45,6 +45,7 @@ public class UserRepository {
 
 		else {
 			User = updatedUser;
+			currentSession.merge(updatedUser);
 			return User;
 		}
 	}
