@@ -45,6 +45,7 @@ public class InviteRepository {
 
 		else {
 			invite = updatedInvite;
+			currentSession.merge(invite);
 			return invite;
 		}
 	}

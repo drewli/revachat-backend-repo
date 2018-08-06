@@ -45,6 +45,7 @@ public class ChannelMembershipRepository {
 
 		else {
 			channelMembership = updatedChannelMembership;
+			currentSession.merge(channelMembership);
 			return channelMembership;
 		}
 	}
